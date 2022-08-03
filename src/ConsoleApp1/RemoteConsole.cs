@@ -7,7 +7,6 @@ namespace ConsoleApp1
 	public class RemoteConsole
 	{
 
-		private XboxConsole _myConsole;//  --- Please get back to this and figure out how to sync with main class
 		//
 		// 1. create constructor taking XboxConsole as a parameter (store as private member) -
 		// 2. Create 2 public methods -
@@ -30,40 +29,30 @@ namespace ConsoleApp1
 		//		visual studio will popup and ask if you want it to auto-populate interface members following IDispose pattern
 		// 4. Dispose of XboxConsole object (CloseConnection and possibly dispose() if it implements IDisposable.
 
+		private XboxConsole _myConsole;
+
 		public RemoteConsole(XboxConsole myConsole)
         {
-			//XboxConsole cnsl;
-			//cnsl = myConsole;
-
-			// correct way
-			//this._myConsole = myConsole;
-        }
-
-		public void AddCommand(/*String - use primitive types (blue ones)*/ string command, XboxConsole myConsole) ///Please solve issue with the myConsole and make sync with main class without arg
-        {
-			uint cbufAddr = 0x860992A0;
-            try
-            {
-                myConsole.ExecuteRPC<uint>(XDRPCMode.Title, cbufAddr, new object[] { command });
-            }
-            catch
-            {
-				Console.WriteLine("\nFailed to insert command!\n");
-            }
-            finally
-            {
-				Console.WriteLine("Executing command!");
-				ExecuteCommands();
-			}
-            // mode, address, arguments (array)
-            //myConsole.ExecuteRPC<uint>(XDRPCMode.Title, , argInfo);
-
+			_myConsole = myConsole;
 		}
 
-		public void ExecuteCommands()
-        {
-			uint cbufAddr = 0x8609B670;
-			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, cbufAddr, new object[] {});
+		public void SendCommand(string commandLine)
+		{
+			const uint addrCBuff_Add = 0x860992A0;
+			const uint addrCBuff_Exec = 0x8609B670;
+
+			// null check command being send for nulls or empty.
+			if (string.IsNullOrEmpty(commandLine)) throw new ArgumentNullException(commandLine);
+
+			// append line feed if one doesn't exist.
+			if (commandLine[commandLine.Length - 1] != '\n') commandLine += '\n';
+
+			// prepare rpc call
+			var paramCmd = new XDRPCStringArgumentInfo(commandLine);
+
+			// execute RPC call
+			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Add, paramCmd);
+			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Exec);
 		}
 	}
 }
