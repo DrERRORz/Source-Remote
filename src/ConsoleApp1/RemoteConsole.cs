@@ -38,8 +38,8 @@ namespace ConsoleApp1
 
 		public void SendCommand(string commandLine)
 		{
-			const uint addrCBuff_Add = 0x860992A0;
-			const uint addrCBuff_Exec = 0x8609B670;
+			const uint addrCBuff_Add = 0x8609A848; ///Updated for current TU
+			const uint addrExeComm = 0x8609CE90; ///Updated for current TU
 
 			// null check command being send for nulls or empty.
 			if (string.IsNullOrEmpty(commandLine)) throw new ArgumentNullException(commandLine);
@@ -52,7 +52,7 @@ namespace ConsoleApp1
 
 			// execute RPC call
 			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Add, paramCmd);
-			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Exec);
+			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrExeComm);
 		}
 	}
 }

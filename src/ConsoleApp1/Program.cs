@@ -19,10 +19,17 @@ namespace ConsoleApp1
             var validGame = false;
 
             // open console connection with null handler
-            console.OpenConnection(null);
+            try
+            {
+                console.OpenConnection(null);
+            }
+            catch
+            {
+                Console.WriteLine("Couldn't connect to console.");
+            }
 
             // check to make sure this console supports RPC
-            if (!console.SupportsRPC()) throw new NotSupportedException("Console does not support XDRPC!");
+            //if (!console.SupportsRPC()) throw new NotSupportedException("Console does not support XDRPC!");
 
             var rcon = new RemoteConsole(console);
             var titleID = console.ExecuteRPC<uint>(XDRPCMode.Title, "xam.xex", 463);
@@ -40,10 +47,11 @@ namespace ConsoleApp1
 
             if (validGame)
             {
-                Console.Write("Connected! \n\nEnter Command: ");
+                Console.Write("Connected!\n");
                 while (lastCmd != exitCmd)
                 {
                     // do rpc if not exit constant
+                    Console.Write("\nEnter Command: ");
                     lastCmd = Console.ReadLine();
                     rcon.SendCommand(lastCmd);
                 }
