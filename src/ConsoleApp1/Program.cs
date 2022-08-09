@@ -33,6 +33,7 @@ namespace ConsoleApp1
 
             var rcon = new RemoteConsole(console);
             var titleID = console.ExecuteRPC<uint>(XDRPCMode.Title, "xam.xex", 463);
+            var gameType = 0;
 
             // switch running title id
             switch (titleID)
@@ -40,6 +41,12 @@ namespace ConsoleApp1
                 case 0x4541080f:
                     Console.WriteLine("The Orange Box is running!");
                     validGame = true;
+                    gameType = 1;
+                    break;
+                case 0x5841125A:
+                    Console.WriteLine("CS:GO is running!");
+                    validGame = true;
+                    gameType = 2;
                     break;
                 default:
                     break;
@@ -53,7 +60,7 @@ namespace ConsoleApp1
                     // do rpc if not exit constant
                     Console.Write("\nEnter Command: ");
                     lastCmd = Console.ReadLine();
-                    rcon.SendCommand(lastCmd);
+                    rcon.SendCommand(lastCmd,gameType);
                 }
             }
 

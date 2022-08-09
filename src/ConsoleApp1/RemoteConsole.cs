@@ -36,10 +36,21 @@ namespace ConsoleApp1
 			_myConsole = myConsole;
 		}
 
-		public void SendCommand(string commandLine)
+		public void SendCommand(string commandLine, int type)
 		{
-			const uint addrCBuff_Add = 0x8609A848; ///Updated for current TU
-			const uint addrExeComm = 0x8609CE90; ///Updated for current TU
+			///All values below are updated to match the current values of the TUs
+			uint addrCBuff_Add = 0;
+			uint addrExeComm = 0;
+			if (type == 1)
+            {
+				addrCBuff_Add = 0x8609A848; 
+				addrExeComm = 0x8609CE90; 
+			}
+			if (type == 2)
+			{
+				addrCBuff_Add = 0x86A1A330; 
+				addrExeComm = 0x86A1AFB8;  
+			}
 
 			// null check command being send for nulls or empty.
 			if (string.IsNullOrEmpty(commandLine)) throw new ArgumentNullException(commandLine);
@@ -50,7 +61,7 @@ namespace ConsoleApp1
 			// prepare rpc call
 			var paramCmd = new XDRPCStringArgumentInfo(commandLine);
 
-			// execute RPC call
+			// execute RPC call 
 			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Add, paramCmd);
 			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrExeComm);
 		}
