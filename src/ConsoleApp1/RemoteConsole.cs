@@ -41,15 +41,20 @@ namespace ConsoleApp1
 			///All values below are updated to match the current values of the TUs
 			uint addrCBuff_Add = 0;
 			uint addrExeComm = 0;
-			if (type == 1)
+			if (type == 1) //TOB
             {
 				addrCBuff_Add = 0x8609A848; 
 				addrExeComm = 0x8609CE90; 
 			}
-			if (type == 2)
+			if (type == 2) //CS:GO
 			{
 				addrCBuff_Add = 0x86A1A330; 
 				addrExeComm = 0x86A1AFB8;  
+			}
+			if (type == 3) //Hyrbid?
+			{
+				addrCBuff_Add = 0x8643C5E0;
+				addrExeComm = 0x8643C8C0;
 			}
 
 			// null check command being send for nulls or empty.

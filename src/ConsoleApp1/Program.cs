@@ -14,7 +14,7 @@ namespace ConsoleApp1
         {
             var manager = new XboxManager();
             var console = manager.OpenConsole(manager.DefaultConsole);
-            var exitCmd = "allahahkbar";
+            var exitCmd = "exitcmd";
             var lastCmd = string.Empty;
             var validGame = false;
 
@@ -39,14 +39,19 @@ namespace ConsoleApp1
             switch (titleID)
             {
                 case 0x4541080f:
-                    Console.WriteLine("The Orange Box is running!");
+                    Console.WriteLine("The Orange Box is running!\n");
                     validGame = true;
                     gameType = 1;
                     break;
                 case 0x5841125A:
-                    Console.WriteLine("CS:GO is running!");
+                    Console.WriteLine("CS:GO is running!\n");
                     validGame = true;
                     gameType = 2;
+                    break;
+                case 0x584109E9:
+                    Console.WriteLine("Hybrid is running!\n");
+                    validGame = true;
+                    gameType = 3;
                     break;
                 default:
                     break;
