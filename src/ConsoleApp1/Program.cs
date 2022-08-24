@@ -1,9 +1,5 @@
 ﻿using XDevkit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Microsoft.Test.Xbox.XDRPC;
 
 namespace ConsoleApp1

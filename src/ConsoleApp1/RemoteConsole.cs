@@ -29,11 +29,11 @@ namespace ConsoleApp1
 		//		visual studio will popup and ask if you want it to auto-populate interface members following IDispose pattern
 		// 4. Dispose of XboxConsole object (CloseConnection and possibly dispose() if it implements IDisposable.
 
-		private XboxConsole _myConsole;
+		private XboxConsole myConsole;
 
 		public RemoteConsole(XboxConsole myConsole)
         {
-			_myConsole = myConsole;
+			this.myConsole = myConsole;
 		}
 
 		public void SendCommand(string commandLine, int type)
@@ -67,8 +67,8 @@ namespace ConsoleApp1
 			var paramCmd = new XDRPCStringArgumentInfo(commandLine);
 
 			// execute RPC call 
-			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Add, paramCmd);
-			_myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrExeComm);
+			myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrCBuff_Add, paramCmd);
+			myConsole.ExecuteRPC<uint>(XDRPCMode.Title, addrExeComm);
 		}
 	}
 }
