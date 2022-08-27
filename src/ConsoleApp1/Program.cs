@@ -1,4 +1,5 @@
 ﻿using XDevkit;
+using JRPC_Client;
 using System;
 using Microsoft.Test.Xbox.XDRPC;
 
@@ -18,6 +19,7 @@ namespace ConsoleApp1
             try
             {
                 console.OpenConnection(null);
+                console.XNotify("Connected! GLHF");
             }
             catch
             {
@@ -71,7 +73,8 @@ namespace ConsoleApp1
             }
 
             Console.WriteLine("bye");
-            
+            console.XNotify("Connection Broke! Please open valid title!");
+
         }
         
     }
