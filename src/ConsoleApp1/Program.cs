@@ -49,6 +49,11 @@ namespace ConsoleApp1
                     validGame = true;
                     gameType = 3;
                     break;
+                case 0x454108D4:
+                    Console.WriteLine("Left 4 Dead 2 is running!\n");
+                    validGame = true;
+                    gameType = 4;
+                    break;
                 default:
                     break;
             }

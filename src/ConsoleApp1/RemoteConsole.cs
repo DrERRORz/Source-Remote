@@ -39,6 +39,7 @@ namespace ConsoleApp1
 		public void SendCommand(string commandLine, int type)
 		{
 			///All values below are updated to match the current values of the TUs
+			///Future me, use this ExecutingComma
 			uint addrCBuff_Add = 0;
 			uint addrExeComm = 0;
 			if (type == 1) //TOB
@@ -56,6 +57,9 @@ namespace ConsoleApp1
 				addrCBuff_Add = 0x8643C5E0;
 				addrExeComm = 0x8643C8C0;
 			}
+			if (type == 4) //Left 4 Dead 2
+				addrCBuff_Add = 0x86BCDDB0;
+				addrExeComm = 0x86BD0388;
 
 			// null check command being send for nulls or empty.
 			if (string.IsNullOrEmpty(commandLine)) throw new ArgumentNullException(commandLine);
