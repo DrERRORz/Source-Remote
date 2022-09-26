@@ -42,24 +42,26 @@ namespace ConsoleApp1
 			///Future me, use this ExecutingComma
 			uint addrCBuff_Add = 0;
 			uint addrExeComm = 0;
-			if (type == 1) //TOB
+			if (type.Equals(1)) //TOB
             {
 				addrCBuff_Add = 0x8609A848; 
 				addrExeComm = 0x8609CE90; 
 			}
-			if (type == 2) //CS:GO
+			if (type.Equals(2)) //CS:GO
 			{
 				addrCBuff_Add = 0x86A1A330; 
 				addrExeComm = 0x86A1AFB8;  
 			}
-			if (type == 3) //Hyrbid?
+			if (type.Equals(3)) //Hyrbid?
 			{
 				addrCBuff_Add = 0x8643C5E0;
 				addrExeComm = 0x8643C8C0;
 			}
-			if (type == 4) //Left 4 Dead 2
+			if (type.Equals(4)) //Left 4 Dead 2
+            {
 				addrCBuff_Add = 0x86BCDDB0;
 				addrExeComm = 0x86BD0388;
+			}
 
 			// null check command being send for nulls or empty.
 			if (string.IsNullOrEmpty(commandLine)) throw new ArgumentNullException(commandLine);
